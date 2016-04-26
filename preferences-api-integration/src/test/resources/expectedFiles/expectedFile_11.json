@@ -1,0 +1,13 @@
+{
+  "preferences":{
+    "11":[
+      {
+        "product":"SHIP",
+        "type":"TRANSACTIONAL",
+        "error":{
+          "errorMessage":"Individual not found  [compasIndividualId=11]"
+        }
+      }
+    ]
+  }
+}
