@@ -1,0 +1,42 @@
+*.class
+target
+*.log
+.DS_Store
+bin
+*.DS_Store
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# IntelliJ
+*.iml
+api/intellij-target
+.idea
+.gitignore
+
+# Code Scan
+.sonar
+*.fpr
+
+# Eclipse
+.settings
+.project
+.classpath
+.mymetadata
+.springBeans
+applicationservices.ipr
+applicationservices.iws
+# Subversion
+.svn/
+
+# test generated files
+#appenroll-web/src/test/resources/pdf/temp.pdf
+#appenroll-web/src/test/resources/pdf/temp_eft.pdf
+#appenroll-web/src/test/resources/pdf/temp_rn.pdf

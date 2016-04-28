@@ -1,0 +1,122 @@
+[
+  {
+    "id": "get-member-individual-preference",
+    "description": "This feature defines the acceptance criteria for Get Member Individual Preference features.",
+    "name": "Get Member Individual Preference",
+    "keyword": "Feature",
+    "line": 1,
+    "elements": [
+      {
+        "id": "get-member-individual-preference;1-get-member-individual-preference-success-conditions;;2",
+        "description": "",
+        "name": "1 Get Member Individual Preference success conditions",
+        "keyword": "Scenario Outline",
+        "line": 13,
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "name": "I provide a individual id as \"12345678\"",
+            "keyword": "Given ",
+            "line": 5,
+            "match": {},
+            "matchedColumns": [
+              0
+            ]
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "name": "I invoke the get preferences API",
+            "keyword": "When ",
+            "line": 6,
+            "match": {}
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "name": "I expect the response as \"expectedFiles/expectedFile_31352553411.json\"",
+            "keyword": "Then ",
+            "line": 7,
+            "match": {},
+            "matchedColumns": [
+              1
+            ]
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "name": "I expect the response to be \"200\"",
+            "keyword": "And ",
+            "line": 8,
+            "match": {},
+            "matchedColumns": [
+              2
+            ]
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "id": "get-member-individual-preference;1-get-member-individual-preference-success-conditions;;3",
+        "description": "",
+        "name": "1 Get Member Individual Preference success conditions",
+        "keyword": "Scenario Outline",
+        "line": 14,
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "name": "I provide a individual id as \"35162625611\"",
+            "keyword": "Given ",
+            "line": 5,
+            "match": {},
+            "matchedColumns": [
+              0
+            ]
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "name": "I invoke the get preferences API",
+            "keyword": "When ",
+            "line": 6,
+            "match": {}
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "name": "I expect the response as \"expectedFiles/expectedFile_35162625611.json\"",
+            "keyword": "Then ",
+            "line": 7,
+            "match": {},
+            "matchedColumns": [
+              1
+            ]
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "name": "I expect the response to be \"200\"",
+            "keyword": "And ",
+            "line": 8,
+            "match": {},
+            "matchedColumns": [
+              2
+            ]
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "uri": "features/GetIndividualMemberPreference.feature"
+  }
+]
