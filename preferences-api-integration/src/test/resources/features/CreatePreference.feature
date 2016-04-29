@@ -19,6 +19,7 @@ Feature: Create Preference
   Examples:
     |DPSD      |Channel|appEnrollInputFile         |oleRefId    |systemName|inputFile                 |response                           |httpStatus |Comments       |
     |2016-06-01|DTC    |inputFiles/dtcPayLoad.json |1492-J312-10|COMPAS    |inputFiles/inputFile1.json|expectedFiles/expectedFile_100.json|201        |Email Ind false|
+    |2016-06-01|DTC    |inputFiles/dtcPayLoad.json |1492-J312-10|COMPAS    |inputFiles/inputFile2.json|expectedFiles/expectedFile_100.json|201        |Email Ind false|
 #    |1492-J712-10|COMPAS    |inputFiles/inputFile2.json|expectedFiles/expectedFile_100.json            |201        |Email Ind true |
 
 
