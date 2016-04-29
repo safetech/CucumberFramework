@@ -50,18 +50,6 @@ public class CreateTransPrefStepdefs {
         restApiClient.setHostName(PropertyUtils.getProperty("ole.base.url"));
     }
 
-    @And("^I supply a ole ref id as \"([^\"]*)\"$")
-    public void I_supply_a_ole_ref_id_as(String oleRefId) throws Throwable {
-        // Express the Regexp above with the code you wish you had
-        JsonObject actualJsonObject = JsonUtils.createJsonFromString(restApiClient.getResponseEntity().getBody());
-
-        System.out.println("Get Provider Method" + restApiClient.getResponseEntity().getBody());
-
-        String test = actualJsonObject.getAsJsonObject().get("applicationId").getAsString();
-        this.oleRefId = oleRefId;
-        this.oleRefId = test;
-    }
-
 
     @And("^I provide an systemName as \"([^\"]*)\"$")
     public void I_provide_an_systemName_as(String systemName) throws Throwable {
@@ -91,16 +79,8 @@ public class CreateTransPrefStepdefs {
 
     @When("^I invoke the create transactional preferences API$")
     public void I_invoke_the_create_transactional_preferences_API() throws Throwable {
-        // Express the Regexp above with the code you wish you had
 
-        JsonObject actualJsonObject = JsonUtils.createJsonFromString(restApiClient.getResponseEntity().getBody());
 
-        System.out.println("Get Provider Method" + restApiClient.getResponseEntity().getBody());
-
-        String test = actualJsonObject.getAsJsonObject().get("applicationId").getAsString();
-//        restApiClient.setRequestBody(actualJsonObject.toString());
-
-        restApiClient.setRestUri(contextPath + test + "?systemName=" + systemName);
         restApiClient.setHttpMethod(HttpMethod.POST);
 
         restApiClient.setHostName(PropertyUtils.getProperty("base.url"));
@@ -117,14 +97,17 @@ public class CreateTransPrefStepdefs {
     @And("^I set the a ole ref id$")
     public void I_set_the_a_ole_ref_id()  {
         // Express the Regexp above with the code you wish you had
+
         JsonObject actualJsonObject = JsonUtils.createJsonFromString(restApiClient.getResponseEntity().getBody());
 
         System.out.println("Get Provider Method" + restApiClient.getResponseEntity().getBody());
 
         String test = actualJsonObject.getAsJsonObject().get("applicationId").getAsString();
-///    this.oleRefId = oleRefId;
-        this.oleRefId = test;
+
+        restApiClient.setRestUri(contextPath + test + "?systemName=" + systemName);
     }
+
+
 
     @Given("^I start an app with dpsd \"([^\"]*)\" on \"([^\"]*)\" from \"([^\"]*)\"")
     public void I_start_an_app_with_dpsd_on_from_testFiles_dtcPayLoad_json(String dpsd, String channel, String payLoad) throws Throwable {
@@ -152,4 +135,19 @@ public class CreateTransPrefStepdefs {
 
     }
 
+    @Given("^I supply a ole ref id as \"([^\"]*)\"$")
+    public void I_supply_a_ole_ref_id_as(String oleRefId) throws Throwable {
+        // Express the Regexp above with the code you wish you had
+        this.oleRefId = oleRefId;
+    }
+
+    @When("^I invoke create transactional preferences API$")
+    public void I_invoke_create_transactional_preferences_API() throws Throwable {
+        // Express the Regexp above with the code you wish you had
+        restApiClient.setRestUri(contextPath + oleRefId + "?systemName=" + systemName);
+        restApiClient.setHttpMethod(HttpMethod.POST);
+
+        restApiClient.setHostName(PropertyUtils.getProperty("base.url"));
+        restApiClient.execute();
+    }
 }
