@@ -12,14 +12,14 @@ Feature: Create Preference
     And I provide a json pay load as "<inputFile>"
     And I set the a ole ref id
     When  I invoke the create transactional preferences API
-#    Then I expect the response to match "<response>"
     And  I expect response to match the "<httpStatus>"
 
 
   Examples:
-    |DPSD      |Channel|appEnrollInputFile         |oleRefId    |systemName|inputFile                 |response                           |httpStatus |Comments       |
-    |2016-06-01|DTC    |inputFiles/dtcPayLoad.json |1492-J312-10|COMPAS    |inputFiles/inputFile1.json|expectedFiles/expectedFile_100.json|201        |Email Ind false|
-    |2016-06-01|DTC    |inputFiles/dtcPayLoad.json |1492-J312-10|COMPAS    |inputFiles/inputFile2.json|expectedFiles/expectedFile_100.json|201        |Email Ind false|
+    |DPSD      |Channel|appEnrollInputFile         |systemName|inputFile                 |httpStatus |Comments       |
+    |2016-06-01|DTC    |inputFiles/dtcPayLoad.json |COMPAS    |inputFiles/inputFile1.json|201        |Email Ind false|
+    |2016-06-01|DTC    |inputFiles/dtcPayLoad.json |COMPAS    |inputFiles/inputFile2.json|201        |Email Ind true |
+
 #    |1492-J712-10|COMPAS    |inputFiles/inputFile2.json|expectedFiles/expectedFile_100.json            |201        |Email Ind true |
 
 
@@ -34,7 +34,7 @@ Feature: Create Preference
 
 
     Examples:
-      |oleRefId    |systemName|inputFile                 |response                                                     |httpStatus |Comments       |
-      |1492-JU90-10|TEST      |inputFiles/inputFile1.json|expectedFiles/expectedFile_createPref_Error1.json            |400        |Valid COMPAS Id|
-
+      |oleRefId    |systemName|inputFile                 |response                                         |httpStatus |Comments             |
+      |1492-JU90-10|TEST      |inputFiles/inputFile1.json|expectedFiles/expectedFile_createPref_Error1.json|400        |Valid COMPAS Id      |
+      |1493-5C15-51|COMPAS    |inputFiles/inputFile1.json|expectedFiles/expectedFile_error409.json         |409        |Member already exists|
 
