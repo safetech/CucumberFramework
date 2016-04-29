@@ -10,7 +10,7 @@ Feature: Get Member Individual Preference
 
   Examples:
     |oleRefId     |response                                       |httpStatus |Comments    |
-    |279          |expectedFiles/expectedFile_8300251212283.json  |200        |CR12 - TC#0 |
+    |976          |expectedFiles/expectedFile_8300251212283.json  |200        |CR12 - TC#0 |
 
 
 
