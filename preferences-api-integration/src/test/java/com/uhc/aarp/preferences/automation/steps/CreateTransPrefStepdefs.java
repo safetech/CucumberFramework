@@ -92,14 +92,18 @@ public class CreateTransPrefStepdefs {
     @When("^I invoke the create transactional preferences API$")
     public void I_invoke_the_create_transactional_preferences_API() throws Throwable {
         // Express the Regexp above with the code you wish you had
+
         JsonObject actualJsonObject = JsonUtils.createJsonFromString(restApiClient.getResponseEntity().getBody());
 
         System.out.println("Get Provider Method" + restApiClient.getResponseEntity().getBody());
 
         String test = actualJsonObject.getAsJsonObject().get("applicationId").getAsString();
-        restApiClient.setRequestBody(actualJsonObject.toString());
+//        restApiClient.setRequestBody(actualJsonObject.toString());
+
         restApiClient.setRestUri(contextPath + test + "?systemName=" + systemName);
         restApiClient.setHttpMethod(HttpMethod.POST);
+
+        restApiClient.setHostName(PropertyUtils.getProperty("base.url"));
         restApiClient.execute();
     }
 
