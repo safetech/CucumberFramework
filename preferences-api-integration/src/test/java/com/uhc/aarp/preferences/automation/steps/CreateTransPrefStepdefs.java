@@ -95,7 +95,7 @@ public class CreateTransPrefStepdefs {
 
 
     @And("^I set the a ole ref id$")
-    public void I_set_the_a_ole_ref_id()  {
+    public void I_set_the_a_ole_ref_id()  throws Exception {
         // Express the Regexp above with the code you wish you had
 
         JsonObject actualJsonObject = JsonUtils.createJsonFromString(restApiClient.getResponseEntity().getBody());
@@ -103,6 +103,18 @@ public class CreateTransPrefStepdefs {
         System.out.println("Get Provider Method" + restApiClient.getResponseEntity().getBody());
 
         String test = actualJsonObject.getAsJsonObject().get("applicationId").getAsString();
+
+//       String individualId=  PreferencesDbHelper.retrieveIndividualID(test);
+//
+//        Gson gson = new Gson();
+//
+//                Enrollments enrollments = new Enrollments();
+//
+//List<Individual> individuals = new ArrayList<Individual>();
+//        Individual.builder().applicationId("XYZ").compasIndividualId(individualId).
+
+
+
 
         restApiClient.setRestUri(contextPath + test + "?systemName=" + systemName);
     }
@@ -150,4 +162,6 @@ public class CreateTransPrefStepdefs {
         restApiClient.setHostName(PropertyUtils.getProperty("base.url"));
         restApiClient.execute();
     }
+
+
 }

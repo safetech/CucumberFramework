@@ -109,13 +109,22 @@
                 <artifactId>json-path</artifactId>
                 <version>2.0.0</version>
             </dependency>
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc6</artifactId>
+                <version>11.2.0.1.0</version>
+            </dependency>
 
 
         </dependencies>
     </dependencyManagement>
     <dependencies>
         <!--Test dependencies -->
-
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.6</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
@@ -168,6 +177,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
             <version>0.2</version>
@@ -178,6 +192,12 @@
                     <groupId>org.slf4j</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>1.2.3</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
@@ -238,6 +258,12 @@
             <properties>
                 <baseUrl>https://aces-test.uhc.com</baseUrl>
                 <contextRoot>preferences-api</contextRoot>
+                <db.connection>jdbc:oracle:thin:@dbsrt0623.uhc.com:1521:ace0ts001</db.connection>
+                <db.userId>IS_CUSTOMERREGISTRY</db.userId>
+                <db.password>4Toctouf</db.password>
+                <compasdb.connection>jdbc:oracle:thin:@dbslt0012.uhc.com:1521:cmpts011</compasdb.connection>
+                <compasdb.userId>uhg_000823050</compasdb.userId>
+                <compasdb.password>Sri9%ram</compasdb.password>
             </properties>
         </profile>
         <profile>

@@ -9,8 +9,8 @@ Feature: Get Member Individual Preference
 
 
   Examples:
-    |oleRefId     |response                                       |httpStatus |Comments    |
-    |976          |expectedFiles/expectedFile_8300251212283.json  |200        |CR12 - TC#0 |
+    |oleRefId     |response                                       |httpStatus |Comments         |
+    |976          |expectedFiles/expectedFile_8300251212283.json  |200        |Success HTTP 200 |
 
 
 
@@ -23,5 +23,5 @@ Feature: Get Member Individual Preference
 
 
     Examples:
-      |oleRefId     |response                                       |httpStatus |Comments    |
-      |1            |expectedFiles/expectedFile_1.json              |404        |CR12 - TC#0 |
+      |oleRefId     |response                                       |httpStatus |Comments        |
+      |1            |expectedFiles/expectedFile_1.json              |404        |Failure HTTP 404|
