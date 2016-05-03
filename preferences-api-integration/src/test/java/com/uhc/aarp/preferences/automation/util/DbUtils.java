@@ -7,16 +7,21 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TimeZone;
 
 public class DbUtils {
 
     private static Connection getConnection() throws SQLException {
+        TimeZone timeZone = TimeZone.getTimeZone("CST");
+        TimeZone.setDefault(timeZone);
         DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
         return DriverManager.getConnection(PropertyUtils.getProperty("db.connection"), PropertyUtils.getProperty("db.userId"), PropertyUtils.getProperty("db.password"));
     }
 
 
     public static Connection getCompasDbConnection() throws SQLException {
+        TimeZone timeZone = TimeZone.getTimeZone("CST");
+        TimeZone.setDefault(timeZone);
         DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
         return DriverManager.getConnection(PropertyUtils.getProperty("compasdb.connection"), PropertyUtils.getProperty("compasdb.userId"), PropertyUtils.getProperty("compasdb.password"));
     }
