@@ -7,24 +7,8 @@ Feature: Update Individual Mapping
 
 
   Scenario Outline: 1 Update Individual Mapping success conditions
-    Given I supply the payload as "<inputFile>"
+    Given I invoke appEnroll with "<Channel>" from "<appEnrollInputFile>"
     And I supply a systemName as "<systemName>"
-    When I invoke the update individual API
-    Then I expect response to match  "<httpStatus>"
-
-
-  Examples:
-    |inputFile                         |systemName|httpStatus |Comments        |
-    |inputFiles/updateIndividual1.json |COMPAS    |200        |Success Scenario|
-
-
-#    |1492-J712-10|COMPAS    |inputFiles/inputFile2.json|expectedFiles/expectedFile_100.json            |201        |Email Ind true |
-
-
-  Scenario Outline: 2 Update Individual Mapping success conditions
-    Given I invoke appEnroll with dpsd "<DPSD>" on "<Channel>" from "<appEnrollInputFile>"
-    And I supply a systemName as "<systemName>"
-#    And I provide json pay load as "<inputFile>"
     And I set the json payload based on appEnroll response
     And insert the compas individual id in registry
     When  I invoke the update individual API
@@ -33,13 +17,15 @@ Feature: Update Individual Mapping
 
 
     Examples:
-      |DPSD      |Channel|appEnrollInputFile        |inputFile                         |systemName|httpStatusCode |Comments        |
-      |2016-06-01|DTC    |inputFiles/dtcPayLoad.json|inputFiles/updateIndividual1.json |COMPAS    |200            |Success Scenario|
+      |DPSD      |Channel|appEnrollInputFile                    |systemName|httpStatusCode |Comments         |
+      |2016-06-01|DTC    |inputFiles/dtcPayLoad.json            |COMPAS    |200            |Email Ind is NULL|
+      |2016-06-01|DTC    |inputFiles/dtcPayLoad_EmailOptIn.json |COMPAS    |200            |Email Opt In YES |
+      |2016-06-01|DTC    |inputFiles/dtcPayLoad_EmailOptOut.json|COMPAS    |200            |Email Opt In No  |
 
 
 
 
-  Scenario Outline: 3 Update Individual Mapping error conditions
+  Scenario Outline: 2 Update Individual Mapping error conditions
     Given I supply the payload as "<inputFile>"
     And I supply a systemName as "<systemName>"
     When  I invoke the update individual API

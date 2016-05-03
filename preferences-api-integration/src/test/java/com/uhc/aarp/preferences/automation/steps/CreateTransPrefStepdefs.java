@@ -29,7 +29,7 @@ public class CreateTransPrefStepdefs {
     private static final String olePath = "/appEnroll-web/resources/applicationDetail/ship/medsupp/";
 
     private RestApiClient restApiClient;
-    private SaveOleStepsDefs saveOleStepsDefs;
+   // private SaveOleStepsDefs saveOleStepsDefs;
 
 //    @Before
 //    public void setup(){
