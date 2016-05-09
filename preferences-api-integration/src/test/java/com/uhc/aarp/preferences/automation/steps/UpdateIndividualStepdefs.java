@@ -124,13 +124,13 @@ public class UpdateIndividualStepdefs {
 
         System.out.println("Get Provider Method" + restApiClient.getResponseEntity().getBody());
 
-     //   String oleRefId = actualJsonObject.getAsJsonObject().get("applicationId").getAsString();
+        //   String oleRefId = actualJsonObject.getAsJsonObject().get("applicationId").getAsString();
 
 
 //        String applicationId = actualJsonObject.getAsJsonObject().get("applicationId").getAsString();
 //        String systemApplicationId = actualJsonObject.getAsJsonObject().get("systemApplicationId").getAsString();
-          String applicationId = JsonPath.read(actualJsonObject.toString(), "$.applicationId");
-          String systemApplicationId = JsonPath.read(actualJsonObject.toString(), "$.systemApplicationId");
+        String applicationId = JsonPath.read(actualJsonObject.toString(), "$.applicationId");
+        String systemApplicationId = JsonPath.read(actualJsonObject.toString(), "$.systemApplicationId");
 
         log.debug("Print the JSON PAth value for ApplicationId " +  applicationId);
 
@@ -175,7 +175,7 @@ public class UpdateIndividualStepdefs {
         restApiClient.setHeaders(headers);
         restApiClient.setRestUri(contextPath  + "?systemName=" + systemName);
 
-       // log.debug(restApiClient.getResponseEntity().getBody());
+        // log.debug(restApiClient.getResponseEntity().getBody());
         restApiClient.setHttpMethod(HttpMethod.PUT);
         restApiClient.execute();
         log.debug(restApiClient.getResponseEntity().getBody());
@@ -220,6 +220,121 @@ public class UpdateIndividualStepdefs {
 //        assertNull("The error message should be null", message);
 
 
+    }
+
+    @Given("^I invoke the appEnroll with \"([^\"]*)\" from \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void I_invoke_the_appEnroll_with_from(String channel, String payLoad, int iterationCount) throws Throwable {
+        // Express the Regexp above with the code you wish you had
+        faker = new Faker();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
+        headers.add("Content-Length", "6890");
+        JsonObject requestJson = JsonUtils.createJsonFromString(FileUtils.readFixture(payLoad));
+        Enrollments enrollments = new Enrollments();
+        List<Individual> individuals = new ArrayList<Individual>();
+        Gson gson = new Gson();
+        for(int i =0;i<iterationCount; i++){
+            requestJson.get("application").getAsJsonObject().addProperty("FirstName", faker.firstName());
+            requestJson.get("application").getAsJsonObject().addProperty("LastName", faker.lastName());
+            requestJson.get("application").getAsJsonObject().addProperty("DOB", DateUtils.getDobInCompasFormat(70));
+            requestJson.get("application").getAsJsonObject().addProperty("ReqEffectiveDate", DateUtils.getFirstDayOfPasOrFutureMonths(+1));
+//          requestJson.get("application").getAsJsonObject().addProperty("ReqEffectiveDate", dpsd);
+            requestJson.get("application").getAsJsonObject().addProperty("AARPMembershipNumber", faker.numerify("#########"+"1"));
+            requestJson.get("application").getAsJsonObject().addProperty("MPBED", DateUtils.getFirstDayOfPasOrFutureMonths(-1));
+            requestJson.get("application").getAsJsonObject().addProperty("MPAED", DateUtils.getFirstDayOfPasOrFutureMonths(-1));
+            requestJson.get("application").getAsJsonObject().addProperty("AddressLine1", faker.streetAddress(false));
+
+            System.out.println("Next MonthDate " + DateUtils.getFirstDayOfPasOrFutureMonths(+1));
+
+            restApiClient.setRequestBody(requestJson.toString());
+            restApiClient.setHeaders(headers);
+            restApiClient.setHostName(PropertyUtils.getProperty("ole.base.url"));
+            restApiClient.setRestUri(olePath + "?channel=" + channel);
+            restApiClient.setHttpMethod(HttpMethod.PUT);
+            restApiClient.execute();
+            I_supply_a_systemName_as("COMPAS");
+            individuals =  I_set_the_bulk_json_payload_based_on_appEnroll_response( individuals);
+
+        }
+
+        enrollments.setIndividuals(individuals);
+
+
+        restApiClient.setHostName(PropertyUtils.getProperty("base.url"));
+//        restApiClient.setRestUri(contextPath  + "?systemName=" + systemName);
+        restApiClient.setRequestBody(gson.toJson(enrollments));
+    }
+
+    public List<Individual> I_set_the_bulk_json_payload_based_on_appEnroll_response( List<Individual> individuals) throws Throwable {
+        // Express the Regexp above with the code you wish you had
+        JsonObject actualJsonObject = JsonUtils.createJsonFromString(restApiClient.getResponseEntity().getBody());
+
+        System.out.println("Get Provider Method" + restApiClient.getResponseEntity().getBody());
+        String applicationId = JsonPath.read(actualJsonObject.toString(), "$.applicationId");
+        String systemApplicationId = JsonPath.read(actualJsonObject.toString(), "$.systemApplicationId");
+
+        log.debug("Print the JSON PAth value for ApplicationId " +  applicationId);
+
+        log.debug("Print the JSON PAth value for ApplicationId " +  systemApplicationId);
+
+        String individualId = PreferencesDbHelper.retrieveIndividualID(applicationId);
+        PreferencesDbHelper.insertPreferenceforMember(individualId);
+
+        individuals.add(Individual.builder().systemApplicationId(systemApplicationId).compasIndividualId(individualId).applicationId(applicationId).build());
+        return individuals;
+    }
+
+    @Given("^I invoke appEnroll service with \"([^\"]*)\" from \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void invokeAppEnrollWithBulkRequests(String channel, String payLoad, int iterationCount) throws Throwable {
+        // Express the Regexp above with the code you wish you had
+        faker = new Faker();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
+        headers.add("Content-Length", "6890");
+        JsonObject requestJson = JsonUtils.createJsonFromString(FileUtils.readFixture(payLoad));
+        Enrollments enrollments = new Enrollments();
+        List<Individual> individuals = new ArrayList<Individual>();
+        Gson gson = new Gson();
+        for(int i =0;i<iterationCount-1; i++){
+            requestJson.get("application").getAsJsonObject().addProperty("FirstName", faker.firstName());
+            requestJson.get("application").getAsJsonObject().addProperty("LastName", faker.lastName());
+            requestJson.get("application").getAsJsonObject().addProperty("DOB", DateUtils.getDobInCompasFormat(70));
+            requestJson.get("application").getAsJsonObject().addProperty("ReqEffectiveDate", DateUtils.getFirstDayOfPasOrFutureMonths(+1));
+//          requestJson.get("application").getAsJsonObject().addProperty("ReqEffectiveDate", dpsd);
+            requestJson.get("application").getAsJsonObject().addProperty("AARPMembershipNumber", faker.numerify("#########"+"1"));
+            requestJson.get("application").getAsJsonObject().addProperty("MPBED", DateUtils.getFirstDayOfPasOrFutureMonths(-1));
+            requestJson.get("application").getAsJsonObject().addProperty("MPAED", DateUtils.getFirstDayOfPasOrFutureMonths(-1));
+            requestJson.get("application").getAsJsonObject().addProperty("AddressLine1", faker.streetAddress(false));
+
+            System.out.println("Next MonthDate " + DateUtils.getFirstDayOfPasOrFutureMonths(+1));
+
+            restApiClient.setRequestBody(requestJson.toString());
+            restApiClient.setHeaders(headers);
+            restApiClient.setHostName(PropertyUtils.getProperty("ole.base.url"));
+            restApiClient.setRestUri(olePath + "?channel=" + channel);
+            restApiClient.setHttpMethod(HttpMethod.PUT);
+            restApiClient.execute();
+            I_supply_a_systemName_as("COMPAS");
+            individuals =  I_set_the_bulk_json_payload_based_on_appEnroll_response( individuals);
+
+        }
+        I_supply_a_systemName_as("COMPAS");
+        individuals.add(Individual.builder().systemApplicationId("123455").compasIndividualId("123456789").applicationId("123455114541").build());
+        enrollments.setIndividuals(individuals);
+        restApiClient.setHostName(PropertyUtils.getProperty("base.url"));
+        restApiClient.setRequestBody(gson.toJson(enrollments));
+    }
+
+    @And("^the response body should contain error status$")
+    public void the_response_body_should_contain_error_status() throws Throwable {
+        // Express the Regexp above with the code you wish you had
+        assertNotNull(restApiClient.getResponseEntity().getBody());
+        JsonObject actualJsonObject = JsonUtils.createJsonFromString(restApiClient.getResponseEntity().getBody());
+        String message = JsonPath.read(actualJsonObject.toString(), "$.preferences.*.[*].error").toString();
+
+        assertTrue(message.contains("error"));
     }
 
 

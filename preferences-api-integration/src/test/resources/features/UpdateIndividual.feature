@@ -42,18 +42,37 @@ Feature: Update Individual Mapping
 
 
 
-  Scenario Outline: 3 Update Individual Mapping Bulk Scenario
-    Given I supply the payload as "<inputFile>"
+  Scenario Outline: 3 Update Individual Mapping Bulk Valid Request Scenario
+    Given I invoke the appEnroll with "<Channel>" from "<appEnrollInputFile>" and "<bulkRequestCount>"
     And I supply a systemName as "<systemName>"
     When  I invoke the update individual API
-    Then I expect response to match  "<httpStatus>"
-    And I expect to match the file "<response>"
+    Then I expect response to match  "<httpStatusCode>"
+    And the response body is not null
+
 
 
     Examples:
-      |inputFile                         |systemName  |httpStatus |response                                   |Comments                                        |
-      |inputFiles/updateIndividual1.json |COMP        |400        |expectedFiles/expectedFile_error400_1.json |Error Scenario - Invalid systemName             |
-      |inputFiles/updateIndividual3.json |COMPAS      |500        |expectedFiles/expectedFile_error500.json   |Error   Scenario - Missing appId in JSON Payload|
+      |DPSD      |Channel|appEnrollInputFile                    |bulkRequestCount|systemName|httpStatusCode |Comments         |
+      |2016-06-01|DTC    |inputFiles/dtcPayLoad.json            |25              |COMPAS    |200            |Email Ind is NULL|
+      |2016-06-01|DTC    |inputFiles/dtcPayLoad_EmailOptIn.json |25              |COMPAS    |500            |Email Opt In YES |
+      |2016-06-01|DTC    |inputFiles/EmailOptOut.json           |25              |COMPAS    |500            |Email Opt In No  |
+
+
+
+
+  Scenario Outline: 4 Update Individual Mapping Bulk Mix of Valid and Invalid Request data Scenario
+    Given I invoke appEnroll service with "<Channel>" from "<appEnrollInputFile>" and "<bulkRequestCount>"
+    And I supply a systemName as "<systemName>"
+    When  I invoke the update individual API
+    Then I expect response to match  "<httpStatusCode>"
+    And the response body should contain error status
+
+
+
+    Examples:
+       |Channel|appEnrollInputFile                    |bulkRequestCount|systemName|httpStatusCode |Comments         |
+       |DTC    |inputFiles/dtcPayLoad.json            |25              |COMPAS    |200            |Email Ind is NULL|
+
 
 
 
