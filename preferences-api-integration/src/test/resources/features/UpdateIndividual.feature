@@ -55,7 +55,8 @@ Feature: Update Individual Mapping
       |DPSD      |Channel|appEnrollInputFile                    |bulkRequestCount|systemName|httpStatusCode |Comments         |
       |2016-06-01|DTC    |inputFiles/dtcPayLoad.json            |25              |COMPAS    |200            |Email Ind is NULL|
       |2016-06-01|DTC    |inputFiles/dtcPayLoad_EmailOptIn.json |25              |COMPAS    |500            |Email Opt In YES |
-      |2016-06-01|DTC    |inputFiles/EmailOptOut.json           |25              |COMPAS    |500            |Email Opt In No  |
+      |2016-06-01|DTC    |inputFiles/dtcPayLoad_EmailOptOut.json|25              |COMPAS    |500            |Email Opt In No  |
+
 
 
 

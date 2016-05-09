@@ -285,6 +285,7 @@ public class UpdateIndividualStepdefs {
         return individuals;
     }
 
+
     @Given("^I invoke appEnroll service with \"([^\"]*)\" from \"([^\"]*)\" and \"([^\"]*)\"$")
     public void invokeAppEnrollWithBulkRequests(String channel, String payLoad, int iterationCount) throws Throwable {
         // Express the Regexp above with the code you wish you had
