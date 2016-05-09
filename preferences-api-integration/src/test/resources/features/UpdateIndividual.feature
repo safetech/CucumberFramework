@@ -59,7 +59,6 @@ Feature: Update Individual Mapping
 
 
 
-
   Scenario Outline: 4 Update Individual Mapping Bulk Mix of Valid and Invalid Request data Scenario
     Given I invoke appEnroll service with "<Channel>" from "<appEnrollInputFile>" and "<bulkRequestCount>"
     And I supply a systemName as "<systemName>"
