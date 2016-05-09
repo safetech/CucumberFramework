@@ -13,6 +13,7 @@ Feature: Update Individual Mapping
     And insert the compas individual id in registry
     When  I invoke the update individual API
     Then I expect response to match  "<httpStatusCode>"
+    And the response body is not null
 
 
 
@@ -37,5 +38,22 @@ Feature: Update Individual Mapping
       |inputFile                         |systemName  |httpStatus |response                                   |Comments                                        |
       |inputFiles/updateIndividual1.json |COMP        |400        |expectedFiles/expectedFile_error400_1.json |Error Scenario - Invalid systemName             |
       |inputFiles/updateIndividual3.json |COMPAS      |500        |expectedFiles/expectedFile_error500.json   |Error   Scenario - Missing appId in JSON Payload|
+      |inputFiles/bulkRequest.json       |COMPAS      |500        |expectedFiles/expectedFile_bulkError.json  |Error   Scenario - Request bulk >25             |
+
+
+
+  Scenario Outline: 3 Update Individual Mapping Bulk Scenario
+    Given I supply the payload as "<inputFile>"
+    And I supply a systemName as "<systemName>"
+    When  I invoke the update individual API
+    Then I expect response to match  "<httpStatus>"
+    And I expect to match the file "<response>"
+
+
+    Examples:
+      |inputFile                         |systemName  |httpStatus |response                                   |Comments                                        |
+      |inputFiles/updateIndividual1.json |COMP        |400        |expectedFiles/expectedFile_error400_1.json |Error Scenario - Invalid systemName             |
+      |inputFiles/updateIndividual3.json |COMPAS      |500        |expectedFiles/expectedFile_error500.json   |Error   Scenario - Missing appId in JSON Payload|
+
 
 

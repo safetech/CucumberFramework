@@ -25,7 +25,7 @@ import org.springframework.http.HttpMethod;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Created by lnampal on 4/29/16.
@@ -62,6 +62,7 @@ public class UpdateIndividualStepdefs {
     public void I_expect_response_to_match(int httpStatusCode) throws Throwable {
         // Express the Regexp above with the code you wish you had
         assertEquals(restApiClient.getResponseEntity().getStatusCode().value(), httpStatusCode);
+
 
     }
 
@@ -207,7 +208,19 @@ public class UpdateIndividualStepdefs {
         restApiClient.setHostName(PropertyUtils.getProperty("ole.base.url"));
     }
 
+    @And("^the response body is not null$")
+    public void the_response_body_is_not_null()  {
+        // Express the Regexp above with the code you wish you had
+        assertNotNull(restApiClient.getResponseEntity().getBody());
+        JsonObject actualJsonObject = JsonUtils.createJsonFromString(restApiClient.getResponseEntity().getBody());
+        String message = JsonPath.read(actualJsonObject.toString(), "$.preferences.*.[0].error").toString();
 
+        assertFalse(message.contains("errorMessage"));
+//        assertFalse(message.contains("[{\"errorMessage\":\"Enrollment not found [applicationId=*]\"}]"));
+//        assertNull("The error message should be null", message);
+
+
+    }
 
 
     @Getter

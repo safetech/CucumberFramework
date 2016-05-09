@@ -20,7 +20,7 @@ Feature: Get Individual Trans Preference
     |COMPAS    |100,300,500,11  |expectedFiles/expectedFile_100_300_500_11.json |200        |Bulk Valid and Invalid COMPAS Id's|
     |COMPAS    |11              |expectedFiles/expectedFile_11.json             |200        |Invalid COMPAS ID                 |
     |COMPAS    |100,100         |expectedFiles/expectedFile_100.json            |200        |Duplicate valid COMPAS Id         |
-#    |UCPS      |11              |expectedFiles/expectedFile_11.json             |200        |Invalid COMPAS ID  |
+#    |UCPS      |11              |expectedFiles/expectedFile_11.json             |200        |Add bulk invalid COMPAS ID  |
 
 
 
