@@ -1,0 +1,13 @@
+{
+  "preferences": {
+    "1493-7118-01": [
+      {
+        "product": "SHIP",
+        "type": "TRANSACTIONAL",
+        "error": {
+          "errorMessage": "Enrollment not found [applicationId=1493-7118-01]"
+        }
+      }
+    ]
+  }
+}

@@ -35,10 +35,11 @@ Feature: Update Individual Mapping
 
 
     Examples:
-      |inputFile                         |systemName  |httpStatus |response                                   |Comments                                        |
-      |inputFiles/updateIndividual1.json |COMP        |400        |expectedFiles/expectedFile_error400_1.json |Error Scenario - Invalid systemName             |
-      |inputFiles/updateIndividual3.json |COMPAS      |500        |expectedFiles/expectedFile_error500.json   |Error   Scenario - Missing appId in JSON Payload|
-      |inputFiles/bulkRequest.json       |COMPAS      |500        |expectedFiles/expectedFile_bulkError.json  |Error   Scenario - Request bulk >25             |
+      |inputFile                          |systemName  |httpStatus |response                                           |Comments                                                                           |
+      |inputFiles/updateIndividual1.json  |COMP        |400        |expectedFiles/expectedFile_error400_1.json         |Error Scenario - Invalid systemName                                                |
+      |inputFiles/updateIndividual3.json  |COMPAS      |500        |expectedFiles/expectedFile_error500.json           |Error   Scenario - Missing appId in JSON Payload                                   |
+      |inputFiles/bulkRequest.json        |COMPAS      |500        |expectedFiles/expectedFile_bulkError.json          |Error   Scenario - Request bulk >25                                                |
+      |inputFiles/enrollmentNotFound.json |COMPAS      |200        |expectedFiles/expectedFile_enrollmentNotFound.json |Error Scenario - Enrollment not found not in APP_ENROLL_PREF_STORE table           |
 
 
 
@@ -52,10 +53,10 @@ Feature: Update Individual Mapping
 
 
     Examples:
-      |DPSD      |Channel|appEnrollInputFile                    |bulkRequestCount|systemName|httpStatusCode |Comments         |
-      |2016-06-01|DTC    |inputFiles/dtcPayLoad.json            |25              |COMPAS    |200            |Email Ind is NULL|
-      |2016-06-01|DTC    |inputFiles/dtcPayLoad_EmailOptIn.json |25              |COMPAS    |500            |Email Opt In YES |
-      |2016-06-01|DTC    |inputFiles/dtcPayLoad_EmailOptOut.json|25              |COMPAS    |500            |Email Opt In No  |
+      |Channel|appEnrollInputFile                    |bulkRequestCount|systemName|httpStatusCode |Comments         |
+      |DTC    |inputFiles/dtcPayLoad.json            |25              |COMPAS    |200            |Email Ind is NULL|
+      |DTC    |inputFiles/dtcPayLoad_EmailOptIn.json |25              |COMPAS    |500            |Email Opt In YES |
+      |DTC    |inputFiles/dtcPayLoad_EmailOptOut.json|25              |COMPAS    |500            |Email Opt In No  |
 
 
 
