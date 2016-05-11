@@ -13,15 +13,14 @@ Feature: Update Individual Preference
     And set the payload for invoking the individual preference "<payLoad>"
     When  I invoke the update individual preference mapping API
     Then I expect the response to match  "<httpStatusCode>"
-#    And the response body is not null
+    And response body is not null
 
 
 
     Examples:
-        |Channel|appEnrollInputFile                    |payLoad                     |httpStatusCode |Comments         |
-        |DTC    |inputFiles/dtcPayLoad.json            |inputFiles/updateIndPref1.json  |200            |Email Ind is NULL|
-#        |DTC    |inputFiles/dtcPayLoad_EmailOptIn.json |                                |200            |Email Opt In YES |
-#        |DTC    |inputFiles/dtcPayLoad_EmailOptOut.json|                                |200            |Email Opt In No  |
+        |Channel|appEnrollInputFile                    |payLoad                            |httpStatusCode |Comments         |
+        |DTC    |inputFiles/dtcPayLoad.json            |inputFiles/updateIndPrefTrue.json  |200            |Email Ind is NULL|
+        |DTC    |inputFiles/dtcPayLoad_EmailOptIn.json |inputFiles/updateIndPrefFalse.json |200            |Email Opt Out    |
 
 
   Scenario Outline: 2 Update Individual Preference success conditions
@@ -30,7 +29,7 @@ Feature: Update Individual Preference
     When  I invoke the update individual preference mapping API
     Then I expect the response to match  "<httpStatusCode>"
     And expect to match the response body "<expectedResponse>"
-  #    And the response body is not null
+    And response body is not null
 
 
     Examples:
@@ -41,21 +40,30 @@ Feature: Update Individual Preference
 
 
 
-  Scenario Outline: 3 Update Individual Preference success conditions
+  Scenario Outline: 3 Update Individual Preference error conditions
     Given set the payload for invoking the individual preference "<payLoad>"
     And supply the compas individual id as "<individualId>"
     When  I invoke the update individual preference mapping API
     Then I expect the response to match  "<httpStatusCode>"
-#    And expect to match the response body "<expectedResponse>"
+
+    Examples:
+      |payLoad                             |individualId  |httpStatusCode |Comments           |
+      |inputFiles/updateIndPrefTrue.json   |              |405            |Blank Individual Id|
+
+
+  Scenario Outline: 4 Update Individual Preference error conditions
+    Given set the payload for invoking the individual preference "<payLoad>"
+    And supply the compas individual id as "<individualId>"
+    When  I invoke the update individual preference mapping API
+    Then I expect the response to match  "<httpStatusCode>"
+    And expect to match the response body "<expectedResponse>"
+    And response body is not null
 
 
 
     Examples:
-      |payLoad                             |individualId  |httpStatusCode|expectedResponse                                   |Comments          |
-      |inputFiles/updateIndPrefTrue.json   |              |405           |expectedFiles/expectedFile_1300259031413.json      |Email Opt is True |
-      |inputFiles/emptyPreferences.json    |1300259031413 |400           |expectedFiles/expectedFile_1300259031413_False.json|Empty Preferences |
-#      |inputFiles/updateIndPrefTrue1.json  |1300259031413 |400           |expectedFiles/expectedFile_1300259031413_False.json|Email Opt is False|
+      |payLoad                             |individualId  |httpStatusCode|expectedResponse                   |Comments          |
+      |inputFiles/emptyPreferences.json    |1300259031413 |400           |expectedFiles/expectedFile_400.json|Empty Preferences |
 
-#  1300259031413
 
 
