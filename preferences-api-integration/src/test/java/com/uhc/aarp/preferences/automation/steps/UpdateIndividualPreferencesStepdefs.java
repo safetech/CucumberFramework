@@ -23,6 +23,7 @@ import org.springframework.http.HttpMethod;
 
 import java.util.List;
 
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -93,7 +94,7 @@ public class UpdateIndividualPreferencesStepdefs {
         System.out.println("Get Provider Method" + restApiClient.getResponseEntity().getBody());
 
         String applicationId = JsonPath.read(actualJsonObject.toString(), "$.applicationId");
-        String systemApplicationId = JsonPath.read(actualJsonObject.toString(), "$.systemApplicationId");
+        Object systemApplicationId = JsonPath.read(actualJsonObject.toString(), "$.systemApplicationId");
 
         log.debug("Print the JSON PAth value for ApplicationId " +  applicationId);
 
