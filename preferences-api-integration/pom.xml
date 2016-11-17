@@ -202,6 +202,14 @@
             <scope>test</scope>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.jayway.restassured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+
+
     </dependencies>
     <build>
         <plugins>
@@ -263,7 +271,7 @@
                 <db.connection>jdbc:oracle:thin:@dbsrt0623.uhc.com:1521:ace0ts001</db.connection>
                 <db.userId>IS_CUSTOMERREGISTRY</db.userId>
                 <db.password>4Toctouf</db.password>
-                <compasdb.connection>jdbc:oracle:thin:@dbslt0012.uhc.com:1521:cmpts011</compasdb.connection>
+                <compasdb.connection>jdbc:oracle:thin:@dbsrt1046.uhc.com:1521:cmp0ts171</compasdb.connection>
                 <compasdb.userId>uhg_000823050</compasdb.userId>
                 <compasdb.password>Sri9%ram</compasdb.password>
             </properties>
@@ -273,6 +281,12 @@
             <properties>
                 <baseUrl>https://aces-stage.uhc.com</baseUrl>
                 <contextRoot>preferences-api</contextRoot>
+                <db.connection>jdbc:oracle:thin:@orass0088.uhc.com:1521:acest021</db.connection>
+                <db.userId>IS_CUSTOMERREGISTRY</db.userId>
+                <db.password>4Toctouf</db.password>
+                <compasdb.connection>jdbc:oracle:thin:@dbsrt1046.uhc.com:1521:cmp0ts171</compasdb.connection>
+                <compasdb.userId>uhg_000823050</compasdb.userId>
+                <compasdb.password>Sri9%ram</compasdb.password>
             </properties>
         </profile>
 

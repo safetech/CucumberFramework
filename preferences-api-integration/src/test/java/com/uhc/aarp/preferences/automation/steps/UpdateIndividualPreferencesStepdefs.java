@@ -9,6 +9,7 @@ import com.uhc.aarp.automation.util.PropertyUtils;
 import com.uhc.aarp.automation.util.RestApiClient;
 import com.uhc.aarp.preferences.automation.dao.PreferencesDbHelper;
 import com.uhc.aarp.preferences.automation.util.DateUtils;
+import com.uhc.aarp.preferences.automation.util.SSLCertificateValidation;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -51,6 +52,7 @@ public class UpdateIndividualPreferencesStepdefs {
 
     @And("^the appenroll api is up and running$")
     public void the_ole_api_is_running() throws Throwable {
+        SSLCertificateValidation.disable();
         restApiClient = new RestApiClient();
         restApiClient.setHostName(PropertyUtils.getProperty("ole.base.url"));
     }
@@ -96,10 +98,10 @@ public class UpdateIndividualPreferencesStepdefs {
         String applicationId = JsonPath.read(actualJsonObject.toString(), "$.applicationId");
         Object systemApplicationId = JsonPath.read(actualJsonObject.toString(), "$.systemApplicationId");
 
+
         log.debug("Print the JSON PAth value for ApplicationId " +  applicationId);
 
         log.debug("Print the JSON PAth value for ApplicationId " +  systemApplicationId);
-
 
     }
 
@@ -109,7 +111,7 @@ public class UpdateIndividualPreferencesStepdefs {
         // Express the Regexp above with the code you wish you had
         JsonObject actualJsonObject = JsonUtils.createJsonFromString(restApiClient.getResponseEntity().getBody());
         String applicationId = actualJsonObject.getAsJsonObject().get("applicationId").getAsString();
-
+        log.debug("JUST Print the new values ");
         individualId = PreferencesDbHelper.retrieveIndividualID(applicationId);
         PreferencesDbHelper.insertPreferenceforMember(individualId);
         log.debug(individualId);

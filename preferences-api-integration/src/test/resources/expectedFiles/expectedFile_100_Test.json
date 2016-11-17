@@ -1,0 +1,16 @@
+{"preferences": {"100": [
+  {
+    "categoryName": "Claims",
+    "categoryDescription": "Claims",
+    "product": "SHIP",
+    "type": "TRANSACTIONAL",
+    "emailOptInIndicator": false
+  },
+  {
+    "categoryName": "PlanBenefits",
+    "categoryDescription": "PlanBenefits",
+    "product": "SHIP",
+    "type": "TRANSACTIONAL",
+    "emailOptInIndicator": false
+  }
+]}}

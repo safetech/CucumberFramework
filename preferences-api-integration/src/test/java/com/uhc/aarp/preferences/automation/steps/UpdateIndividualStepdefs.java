@@ -19,9 +19,18 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.skyscreamer.jsonassert.JSONAssert;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -213,9 +222,12 @@ public class UpdateIndividualStepdefs {
         // Express the Regexp above with the code you wish you had
         assertNotNull(restApiClient.getResponseEntity().getBody());
         JsonObject actualJsonObject = JsonUtils.createJsonFromString(restApiClient.getResponseEntity().getBody());
-        String message = JsonPath.read(actualJsonObject.toString(), "$.preferences.*.[0].error").toString();
+//        String message = JsonPath.read(actualJsonObject.toString(), "$.preferences.*.[0].error").toString();
+        String message = JsonPath.read(actualJsonObject.toString(), "$.preferences.*.[0].*").toString();
 
-        assertFalse(message.contains("errorMessage"));
+        assertFalse(message.contains("error"));
+
+
 //        assertFalse(message.contains("[{\"errorMessage\":\"Enrollment not found [applicationId=*]\"}]"));
 //        assertNull("The error message should be null", message);
 
@@ -246,12 +258,21 @@ public class UpdateIndividualStepdefs {
             requestJson.get("application").getAsJsonObject().addProperty("AddressLine1", faker.streetAddress(false));
 
             System.out.println("Next MonthDate " + DateUtils.getFirstDayOfPasOrFutureMonths(+1));
+            RestTemplate restTemplate = new RestTemplate();
+            HostnameVerifier verifier = new NullHostnameVerifier();
+            MySimpleClientHttpRequestFactory factory = new MySimpleClientHttpRequestFactory(verifier);
+            restTemplate.setRequestFactory(factory);
+
+//            HttpEntity request = new HttpEntity(requestJson.toString(), headers);
+
+//            ResponseEntity<String> responseEntity = restTemplate.exchange(PropertyUtils.getProperty("ole.base.url")+olePath + "?channel=" + channel, HttpMethod.PUT,request , String.class, new Object[0]);
 
             restApiClient.setRequestBody(requestJson.toString());
             restApiClient.setHeaders(headers);
             restApiClient.setHostName(PropertyUtils.getProperty("ole.base.url"));
             restApiClient.setRestUri(olePath + "?channel=" + channel);
             restApiClient.setHttpMethod(HttpMethod.PUT);
+//            SSLCertificateValidation.disable();
             restApiClient.execute();
             I_supply_a_systemName_as("COMPAS");
             individuals =  I_set_the_bulk_json_payload_based_on_appEnroll_response( individuals);
@@ -274,9 +295,9 @@ public class UpdateIndividualStepdefs {
         String applicationId = JsonPath.read(actualJsonObject.toString(), "$.applicationId");
         String systemApplicationId = JsonPath.read(actualJsonObject.toString(), "$.systemApplicationId");
 
-        log.debug("Print the JSON PAth value for ApplicationId " +  applicationId);
+        log.debug("Print the JSON PAth value for ApplicationId " + applicationId);
 
-        log.debug("Print the JSON PAth value for ApplicationId " +  systemApplicationId);
+        log.debug("Print the JSON PAth value for ApplicationId " + systemApplicationId);
 
         String individualId = PreferencesDbHelper.retrieveIndividualID(applicationId);
         PreferencesDbHelper.insertPreferenceforMember(individualId);
@@ -356,5 +377,29 @@ public class UpdateIndividualStepdefs {
         private String systemApplicationId;
         private String compasIndividualId;
 
+    }
+
+    public class MySimpleClientHttpRequestFactory extends SimpleClientHttpRequestFactory {
+
+        private final HostnameVerifier verifier;
+
+        public MySimpleClientHttpRequestFactory(HostnameVerifier verifier) {
+            this.verifier = verifier;
+        }
+
+        @Override
+        protected void prepareConnection(HttpURLConnection connection, String httpMethod) throws IOException {
+            if (connection instanceof HttpsURLConnection) {
+                ((HttpsURLConnection) connection).setHostnameVerifier(verifier);
+            }
+            super.prepareConnection(connection, httpMethod);
+        }
+
+    }
+
+    public class NullHostnameVerifier implements HostnameVerifier {
+        public boolean verify(String hostname, SSLSession session) {
+            return true;
+        }
     }
 }

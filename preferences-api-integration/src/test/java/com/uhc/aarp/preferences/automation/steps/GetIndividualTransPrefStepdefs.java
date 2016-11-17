@@ -16,9 +16,7 @@ import org.springframework.http.HttpMethod;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-/**
- * Created by lnampal on 4/25/16.
- */
+
 public class GetIndividualTransPrefStepdefs {
 
     private String systemName;
@@ -63,7 +61,6 @@ public class GetIndividualTransPrefStepdefs {
     @When("^I invoke the get individual transactional preferences API$")
     public void I_invoke_the_get_individual_transactional_preferences_API() throws Throwable {
         // Use the restApiClient to set the headers
-
 
         restApiClient.setHttpMethod(HttpMethod.GET);
         restApiClient.execute();

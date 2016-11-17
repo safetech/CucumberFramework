@@ -1,5 +1,5 @@
 {"preferences": {
-  "100":    [
+  "4000002397540":    [
     {
       "categoryName": "Claims",
       "categoryDescription": "Claims",
@@ -15,13 +15,13 @@
       "emailOptInIndicator": false
     }
   ],
-  "300":    [
+  "7500011841075":    [
     {
       "categoryName": "Claims",
-      "categoryDescription": "Explanation of Benefits (EOB)",
+      "categoryDescription": "Claims",
       "product": "SHIP",
       "type": "TRANSACTIONAL",
-      "emailOptInIndicator": true
+      "emailOptInIndicator": false
     },
     {
       "categoryName": "PlanBenefits",
@@ -31,13 +31,13 @@
       "emailOptInIndicator": false
     }
   ],
-  "500":    [
+  "5600250741456":    [
     {
       "categoryName": "Claims",
-      "categoryDescription": "Explanation of Benefits (EOB)",
+      "categoryDescription": "Claims",
       "product": "SHIP",
       "type": "TRANSACTIONAL",
-      "emailOptInIndicator": true
+      "emailOptInIndicator": false
     },
     {
       "categoryName": "PlanBenefits",
@@ -46,10 +46,5 @@
       "type": "TRANSACTIONAL",
       "emailOptInIndicator": false
     }
-  ],
-  "11": [   {
-    "product": "SHIP",
-    "type": "TRANSACTIONAL",
-    "error": {"errorMessage": "Individual not found  [compasIndividualId=11]"}
-  }]
+  ]
 }}

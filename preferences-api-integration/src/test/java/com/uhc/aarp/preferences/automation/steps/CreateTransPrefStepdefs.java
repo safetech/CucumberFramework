@@ -77,15 +77,7 @@ public class CreateTransPrefStepdefs {
         assertEquals(restApiClient.getResponseEntity().getStatusCode().value(), httpStatusCode);
     }
 
-    @When("^I invoke the create transactional preferences API$")
-    public void I_invoke_the_create_transactional_preferences_API() throws Throwable {
 
-
-        restApiClient.setHttpMethod(HttpMethod.POST);
-
-        restApiClient.setHostName(PropertyUtils.getProperty("base.url"));
-        restApiClient.execute();
-    }
 
     @Then("^I expect response to match \"([^\"]*)\"$")
     public void I_expect_the_response_to_match(String expectedResult) throws Throwable {
@@ -114,12 +106,19 @@ public class CreateTransPrefStepdefs {
 //        Individual.builder().applicationId("XYZ").compasIndividualId(individualId).
 
 
-
+        restApiClient.setHostName(PropertyUtils.getProperty("base.url"));
 
         restApiClient.setRestUri(contextPath + test + "?systemName=" + systemName);
     }
 
+    @When("^I invoke the create transactional preferences API$")
+    public void I_invoke_the_create_transactional_preferences_API() throws Throwable {
 
+
+        restApiClient.setHttpMethod(HttpMethod.POST);
+        //restApiClient.setHostName(PropertyUtils.getProperty("base.url"));
+        restApiClient.execute();
+    }
 
     @Given("^I start an app with dpsd \"([^\"]*)\" on \"([^\"]*)\" from \"([^\"]*)\"")
     public void I_start_an_app_with_dpsd_on_from_testFiles_dtcPayLoad_json(String dpsd, String channel, String payLoad) throws Throwable {

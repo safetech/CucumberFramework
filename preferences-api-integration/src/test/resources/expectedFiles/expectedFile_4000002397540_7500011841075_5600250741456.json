@@ -1,0 +1,92 @@
+{"preferences": {
+  "4000002397540":    [
+    {
+      "categoryName": "Claims",
+      "categoryDescription": "Claims",
+      "product": "SHIP",
+      "type": "TRANSACTIONAL",
+      "emailOptInIndicator": false
+    },
+    {
+      "categoryName": "PlanBenefits",
+      "categoryDescription": "PlanBenefits",
+      "product": "SHIP",
+      "type": "TRANSACTIONAL",
+      "emailOptInIndicator": false
+    },
+    {
+      "categoryName": "BillingAccount",
+      "categoryDescription": "BillingAccount",
+      "product": "SHIP",
+      "type": "TRANSACTIONAL",
+      "emailOptInIndicator": false
+    },
+    {
+      "categoryName": "HealthWellnessValuableExtras",
+      "categoryDescription": "HealthWellnessValuableExtras",
+      "product": "SHIP",
+      "type": "TRANSACTIONAL",
+      "emailOptInIndicator": false
+    }
+  ],
+  "7500011841075":    [
+    {
+      "categoryName": "Claims",
+      "categoryDescription": "Claims",
+      "product": "SHIP",
+      "type": "TRANSACTIONAL",
+      "emailOptInIndicator": false
+    },
+    {
+      "categoryName": "PlanBenefits",
+      "categoryDescription": "PlanBenefits",
+      "product": "SHIP",
+      "type": "TRANSACTIONAL",
+      "emailOptInIndicator": false
+    },
+    {
+      "categoryName": "BillingAccount",
+      "categoryDescription": "BillingAccount",
+      "product": "SHIP",
+      "type": "TRANSACTIONAL",
+      "emailOptInIndicator": false
+    },
+    {
+      "categoryName": "HealthWellnessValuableExtras",
+      "categoryDescription": "HealthWellnessValuableExtras",
+      "product": "SHIP",
+      "type": "TRANSACTIONAL",
+      "emailOptInIndicator": false
+    }
+  ],
+  "5600250741456":    [
+    {
+      "categoryName": "Claims",
+      "categoryDescription": "Claims",
+      "product": "SHIP",
+      "type": "TRANSACTIONAL",
+      "emailOptInIndicator": false
+    },
+    {
+      "categoryName": "PlanBenefits",
+      "categoryDescription": "PlanBenefits",
+      "product": "SHIP",
+      "type": "TRANSACTIONAL",
+      "emailOptInIndicator": false
+    },
+    {
+      "categoryName": "BillingAccount",
+      "categoryDescription": "BillingAccount",
+      "product": "SHIP",
+      "type": "TRANSACTIONAL",
+      "emailOptInIndicator": false
+    },
+    {
+      "categoryName": "HealthWellnessValuableExtras",
+      "categoryDescription": "HealthWellnessValuableExtras",
+      "product": "SHIP",
+      "type": "TRANSACTIONAL",
+      "emailOptInIndicator": false
+    }
+  ]
+}}

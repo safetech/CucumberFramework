@@ -1,3 +1,4 @@
+@ignoreStage
 Feature: Update Individual Preference
   This feature defines the acceptance criteria for Update Individual Preference features.
 
@@ -34,8 +35,8 @@ Feature: Update Individual Preference
 
     Examples:
         |payLoad                            |individualId  |httpStatusCode|expectedResponse                                   |Comments          |
-        |inputFiles/updateIndPrefTrue.json  |1300259031413 |200           |expectedFiles/expectedFile_1300259031413.json      |Email Opt is True |
-        |inputFiles/updateIndPrefFalse.json |1300259031413 |200           |expectedFiles/expectedFile_1300259031413_False.json|Email Opt is False|
+        |inputFiles/updateIndPrefTrue.json  |7400259052174 |200           |expectedFiles/expectedFile_7400259052174.json      |Email Opt is True |
+        |inputFiles/updateIndPrefFalse.json |7300259052173 |200           |expectedFiles/expectedFile_7300259052173.json      |Email Opt is False|
 
 
 
@@ -56,14 +57,16 @@ Feature: Update Individual Preference
     And supply the compas individual id as "<individualId>"
     When  I invoke the update individual preference mapping API
     Then I expect the response to match  "<httpStatusCode>"
-    And expect to match the response body "<expectedResponse>"
     And response body is not null
 
 
 
     Examples:
-      |payLoad                             |individualId  |httpStatusCode|expectedResponse                   |Comments          |
-      |inputFiles/emptyPreferences.json    |1300259031413 |400           |expectedFiles/expectedFile_400.json|Empty Preferences |
+      |payLoad                                 |individualId  |httpStatusCode|Comments                                |
+      |inputFiles/emptyPreferences.json        |1300259031413 |400           |Empty Preferences                       |
+      |inputFiles/updateIndPrefTrue.json       |1232424224212 |500           |Individual id doesn't exist in REGISTRY |
+      |inputFiles/updateIndPrefTrueInvalid.json|1300259031413 |400           |Incorrect preference name supplied      |
+
 
 
 
